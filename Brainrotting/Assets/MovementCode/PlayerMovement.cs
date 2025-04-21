@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
 
         rb.useGravity             = true;
-        rb.drag                   = 0f;
+        rb.linearDamping                   = 0f;
         rb.interpolation          = RigidbodyInterpolation.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ApplyEnhancedGravity()
     {
-        Vector3 v = rb.velocity;
+        Vector3 v = rb.linearVelocity;
         if (v.y < 0)
             rb.AddForce(Vector3.up * Physics.gravity.y * (fallMultiplier - 1), ForceMode.Acceleration);
         else if (v.y > 0 && !Input.GetMouseButton(0))
